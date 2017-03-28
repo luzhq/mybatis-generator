@@ -1,0 +1,719 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.morning.star.dms.order.dao.DmsOrderInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.morning.star.dms.order.entity.DmsOrderInfo" >
+    <id column="orderId" property="orderId" jdbcType="BIGINT" />
+    <result column="orderNo" property="orderNo" jdbcType="VARCHAR" />
+    <result column="outOrderNo" property="outOrderNo" jdbcType="CHAR" />
+    <result column="packageCode" property="packageCode" jdbcType="VARCHAR" />
+    <result column="lockApplyCode" property="lockApplyCode" jdbcType="VARCHAR" />
+    <result column="payNo" property="payNo" jdbcType="VARCHAR" />
+    <result column="distributorCode" property="distributorCode" jdbcType="VARCHAR" />
+    <result column="distributorName" property="distributorName" jdbcType="VARCHAR" />
+    <result column="clearanceType" property="clearanceType" jdbcType="VARCHAR" />
+    <result column="taxation" property="taxation" jdbcType="DECIMAL" />
+    <result column="totalAmount" property="totalAmount" jdbcType="DECIMAL" />
+    <result column="discountFee" property="discountFee" jdbcType="DECIMAL" />
+    <result column="saleAmount" property="saleAmount" jdbcType="DECIMAL" />
+    <result column="logisticsFee" property="logisticsFee" jdbcType="DECIMAL" />
+    <result column="owner" property="owner" jdbcType="VARCHAR" />
+    <result column="orderStatus" property="orderStatus" jdbcType="VARCHAR" />
+    <result column="auditStatus" property="auditStatus" jdbcType="VARCHAR" />
+    <result column="submitTime" property="submitTime" jdbcType="TIMESTAMP" />
+    <result column="payType" property="payType" jdbcType="VARCHAR" />
+    <result column="payTime" property="payTime" jdbcType="TIMESTAMP" />
+    <result column="outTime" property="outTime" jdbcType="TIMESTAMP" />
+    <result column="couponJson" property="couponJson" jdbcType="VARCHAR" />
+    <result column="shippedTime" property="shippedTime" jdbcType="TIMESTAMP" />
+    <result column="logisticsCompany" property="logisticsCompany" jdbcType="VARCHAR" />
+    <result column="logisticsNo" property="logisticsNo" jdbcType="VARCHAR" />
+    <result column="signTime" property="signTime" jdbcType="TIMESTAMP" />
+    <result column="buyerRemark" property="buyerRemark" jdbcType="VARCHAR" />
+    <result column="orderRemark" property="orderRemark" jdbcType="VARCHAR" />
+    <result column="createTime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updateTime" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="deleteFlag" property="deleteFlag" jdbcType="INTEGER" />
+    <result column="omsSystemStatus" property="omsSystemStatus" jdbcType="VARCHAR" />
+    <result column="omsSystemRemark" property="omsSystemRemark" jdbcType="VARCHAR" />
+    <result column="settleFlag" property="settleFlag" jdbcType="INTEGER" />
+    <result column="refundTime" property="refundTime" jdbcType="TIMESTAMP" />
+    <result column="auditTime" property="auditTime" jdbcType="TIMESTAMP" />
+    <result column="orderSource" property="orderSource" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    orderId, orderNo, outOrderNo, packageCode, lockApplyCode, payNo, distributorCode, 
+    distributorName, clearanceType, taxation, totalAmount, discountFee, saleAmount, logisticsFee, 
+    owner, orderStatus, auditStatus, submitTime, payType, payTime, outTime, couponJson, 
+    shippedTime, logisticsCompany, logisticsNo, signTime, buyerRemark, orderRemark, createTime, 
+    updateTime, deleteFlag, omsSystemStatus, omsSystemRemark, settleFlag, refundTime, 
+    auditTime, orderSource
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.morning.star.dms.order.entity.DmsOrderInfoCriteria" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'false' as QUERYID,
+    <include refid="Base_Column_List" />
+    from dms_order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from dms_order_info
+    where orderId = #{orderId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from dms_order_info
+    where orderId = #{orderId,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.morning.star.dms.order.entity.DmsOrderInfoCriteria" >
+    delete from dms_order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.morning.star.dms.order.entity.DmsOrderInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="orderId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dms_order_info (orderNo, outOrderNo, packageCode, 
+      lockApplyCode, payNo, distributorCode, 
+      distributorName, clearanceType, taxation, 
+      totalAmount, discountFee, saleAmount, 
+      logisticsFee, owner, orderStatus, 
+      auditStatus, submitTime, payType, 
+      payTime, outTime, couponJson, 
+      shippedTime, logisticsCompany, logisticsNo, 
+      signTime, buyerRemark, orderRemark, 
+      createTime, updateTime, deleteFlag, 
+      omsSystemStatus, omsSystemRemark, settleFlag, 
+      refundTime, auditTime, orderSource
+      )
+    values (#{orderNo,jdbcType=VARCHAR}, #{outOrderNo,jdbcType=CHAR}, #{packageCode,jdbcType=VARCHAR}, 
+      #{lockApplyCode,jdbcType=VARCHAR}, #{payNo,jdbcType=VARCHAR}, #{distributorCode,jdbcType=VARCHAR}, 
+      #{distributorName,jdbcType=VARCHAR}, #{clearanceType,jdbcType=VARCHAR}, #{taxation,jdbcType=DECIMAL}, 
+      #{totalAmount,jdbcType=DECIMAL}, #{discountFee,jdbcType=DECIMAL}, #{saleAmount,jdbcType=DECIMAL}, 
+      #{logisticsFee,jdbcType=DECIMAL}, #{owner,jdbcType=VARCHAR}, #{orderStatus,jdbcType=VARCHAR}, 
+      #{auditStatus,jdbcType=VARCHAR}, #{submitTime,jdbcType=TIMESTAMP}, #{payType,jdbcType=VARCHAR}, 
+      #{payTime,jdbcType=TIMESTAMP}, #{outTime,jdbcType=TIMESTAMP}, #{couponJson,jdbcType=VARCHAR}, 
+      #{shippedTime,jdbcType=TIMESTAMP}, #{logisticsCompany,jdbcType=VARCHAR}, #{logisticsNo,jdbcType=VARCHAR}, 
+      #{signTime,jdbcType=TIMESTAMP}, #{buyerRemark,jdbcType=VARCHAR}, #{orderRemark,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{deleteFlag,jdbcType=INTEGER}, 
+      #{omsSystemStatus,jdbcType=VARCHAR}, #{omsSystemRemark,jdbcType=VARCHAR}, #{settleFlag,jdbcType=INTEGER}, 
+      #{refundTime,jdbcType=TIMESTAMP}, #{auditTime,jdbcType=TIMESTAMP}, #{orderSource,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.morning.star.dms.order.entity.DmsOrderInfo" >
+    <selectKey resultType="java.lang.Long" keyProperty="orderId" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into dms_order_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        orderNo,
+      </if>
+      <if test="outOrderNo != null" >
+        outOrderNo,
+      </if>
+      <if test="packageCode != null" >
+        packageCode,
+      </if>
+      <if test="lockApplyCode != null" >
+        lockApplyCode,
+      </if>
+      <if test="payNo != null" >
+        payNo,
+      </if>
+      <if test="distributorCode != null" >
+        distributorCode,
+      </if>
+      <if test="distributorName != null" >
+        distributorName,
+      </if>
+      <if test="clearanceType != null" >
+        clearanceType,
+      </if>
+      <if test="taxation != null" >
+        taxation,
+      </if>
+      <if test="totalAmount != null" >
+        totalAmount,
+      </if>
+      <if test="discountFee != null" >
+        discountFee,
+      </if>
+      <if test="saleAmount != null" >
+        saleAmount,
+      </if>
+      <if test="logisticsFee != null" >
+        logisticsFee,
+      </if>
+      <if test="owner != null" >
+        owner,
+      </if>
+      <if test="orderStatus != null" >
+        orderStatus,
+      </if>
+      <if test="auditStatus != null" >
+        auditStatus,
+      </if>
+      <if test="submitTime != null" >
+        submitTime,
+      </if>
+      <if test="payType != null" >
+        payType,
+      </if>
+      <if test="payTime != null" >
+        payTime,
+      </if>
+      <if test="outTime != null" >
+        outTime,
+      </if>
+      <if test="couponJson != null" >
+        couponJson,
+      </if>
+      <if test="shippedTime != null" >
+        shippedTime,
+      </if>
+      <if test="logisticsCompany != null" >
+        logisticsCompany,
+      </if>
+      <if test="logisticsNo != null" >
+        logisticsNo,
+      </if>
+      <if test="signTime != null" >
+        signTime,
+      </if>
+      <if test="buyerRemark != null" >
+        buyerRemark,
+      </if>
+      <if test="orderRemark != null" >
+        orderRemark,
+      </if>
+      <if test="createTime != null" >
+        createTime,
+      </if>
+      <if test="updateTime != null" >
+        updateTime,
+      </if>
+      <if test="deleteFlag != null" >
+        deleteFlag,
+      </if>
+      <if test="omsSystemStatus != null" >
+        omsSystemStatus,
+      </if>
+      <if test="omsSystemRemark != null" >
+        omsSystemRemark,
+      </if>
+      <if test="settleFlag != null" >
+        settleFlag,
+      </if>
+      <if test="refundTime != null" >
+        refundTime,
+      </if>
+      <if test="auditTime != null" >
+        auditTime,
+      </if>
+      <if test="orderSource != null" >
+        orderSource,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outOrderNo != null" >
+        #{outOrderNo,jdbcType=CHAR},
+      </if>
+      <if test="packageCode != null" >
+        #{packageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lockApplyCode != null" >
+        #{lockApplyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payNo != null" >
+        #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="distributorCode != null" >
+        #{distributorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="distributorName != null" >
+        #{distributorName,jdbcType=VARCHAR},
+      </if>
+      <if test="clearanceType != null" >
+        #{clearanceType,jdbcType=VARCHAR},
+      </if>
+      <if test="taxation != null" >
+        #{taxation,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null" >
+        #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="discountFee != null" >
+        #{discountFee,jdbcType=DECIMAL},
+      </if>
+      <if test="saleAmount != null" >
+        #{saleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="logisticsFee != null" >
+        #{logisticsFee,jdbcType=DECIMAL},
+      </if>
+      <if test="owner != null" >
+        #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null" >
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        #{auditStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null" >
+        #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outTime != null" >
+        #{outTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="couponJson != null" >
+        #{couponJson,jdbcType=VARCHAR},
+      </if>
+      <if test="shippedTime != null" >
+        #{shippedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logisticsCompany != null" >
+        #{logisticsCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsNo != null" >
+        #{logisticsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null" >
+        #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyerRemark != null" >
+        #{buyerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderRemark != null" >
+        #{orderRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="omsSystemStatus != null" >
+        #{omsSystemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="omsSystemRemark != null" >
+        #{omsSystemRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="settleFlag != null" >
+        #{settleFlag,jdbcType=INTEGER},
+      </if>
+      <if test="refundTime != null" >
+        #{refundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditTime != null" >
+        #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderSource != null" >
+        #{orderSource,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.morning.star.dms.order.entity.DmsOrderInfoCriteria" resultType="java.lang.Integer" >
+    select count(*) from dms_order_info
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update dms_order_info
+    <set >
+      <if test="record.orderId != null" >
+        orderId = #{record.orderId,jdbcType=BIGINT},
+      </if>
+      <if test="record.orderNo != null" >
+        orderNo = #{record.orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outOrderNo != null" >
+        outOrderNo = #{record.outOrderNo,jdbcType=CHAR},
+      </if>
+      <if test="record.packageCode != null" >
+        packageCode = #{record.packageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lockApplyCode != null" >
+        lockApplyCode = #{record.lockApplyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payNo != null" >
+        payNo = #{record.payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.distributorCode != null" >
+        distributorCode = #{record.distributorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.distributorName != null" >
+        distributorName = #{record.distributorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.clearanceType != null" >
+        clearanceType = #{record.clearanceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.taxation != null" >
+        taxation = #{record.taxation,jdbcType=DECIMAL},
+      </if>
+      <if test="record.totalAmount != null" >
+        totalAmount = #{record.totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.discountFee != null" >
+        discountFee = #{record.discountFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.saleAmount != null" >
+        saleAmount = #{record.saleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.logisticsFee != null" >
+        logisticsFee = #{record.logisticsFee,jdbcType=DECIMAL},
+      </if>
+      <if test="record.owner != null" >
+        owner = #{record.owner,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderStatus != null" >
+        orderStatus = #{record.orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.auditStatus != null" >
+        auditStatus = #{record.auditStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.submitTime != null" >
+        submitTime = #{record.submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.payType != null" >
+        payType = #{record.payType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.payTime != null" >
+        payTime = #{record.payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.outTime != null" >
+        outTime = #{record.outTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.couponJson != null" >
+        couponJson = #{record.couponJson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shippedTime != null" >
+        shippedTime = #{record.shippedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.logisticsCompany != null" >
+        logisticsCompany = #{record.logisticsCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="record.logisticsNo != null" >
+        logisticsNo = #{record.logisticsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.signTime != null" >
+        signTime = #{record.signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.buyerRemark != null" >
+        buyerRemark = #{record.buyerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.orderRemark != null" >
+        orderRemark = #{record.orderRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateTime != null" >
+        updateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.deleteFlag != null" >
+        deleteFlag = #{record.deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.omsSystemStatus != null" >
+        omsSystemStatus = #{record.omsSystemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="record.omsSystemRemark != null" >
+        omsSystemRemark = #{record.omsSystemRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.settleFlag != null" >
+        settleFlag = #{record.settleFlag,jdbcType=INTEGER},
+      </if>
+      <if test="record.refundTime != null" >
+        refundTime = #{record.refundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.auditTime != null" >
+        auditTime = #{record.auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.orderSource != null" >
+        orderSource = #{record.orderSource,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update dms_order_info
+    set orderId = #{record.orderId,jdbcType=BIGINT},
+      orderNo = #{record.orderNo,jdbcType=VARCHAR},
+      outOrderNo = #{record.outOrderNo,jdbcType=CHAR},
+      packageCode = #{record.packageCode,jdbcType=VARCHAR},
+      lockApplyCode = #{record.lockApplyCode,jdbcType=VARCHAR},
+      payNo = #{record.payNo,jdbcType=VARCHAR},
+      distributorCode = #{record.distributorCode,jdbcType=VARCHAR},
+      distributorName = #{record.distributorName,jdbcType=VARCHAR},
+      clearanceType = #{record.clearanceType,jdbcType=VARCHAR},
+      taxation = #{record.taxation,jdbcType=DECIMAL},
+      totalAmount = #{record.totalAmount,jdbcType=DECIMAL},
+      discountFee = #{record.discountFee,jdbcType=DECIMAL},
+      saleAmount = #{record.saleAmount,jdbcType=DECIMAL},
+      logisticsFee = #{record.logisticsFee,jdbcType=DECIMAL},
+      owner = #{record.owner,jdbcType=VARCHAR},
+      orderStatus = #{record.orderStatus,jdbcType=VARCHAR},
+      auditStatus = #{record.auditStatus,jdbcType=VARCHAR},
+      submitTime = #{record.submitTime,jdbcType=TIMESTAMP},
+      payType = #{record.payType,jdbcType=VARCHAR},
+      payTime = #{record.payTime,jdbcType=TIMESTAMP},
+      outTime = #{record.outTime,jdbcType=TIMESTAMP},
+      couponJson = #{record.couponJson,jdbcType=VARCHAR},
+      shippedTime = #{record.shippedTime,jdbcType=TIMESTAMP},
+      logisticsCompany = #{record.logisticsCompany,jdbcType=VARCHAR},
+      logisticsNo = #{record.logisticsNo,jdbcType=VARCHAR},
+      signTime = #{record.signTime,jdbcType=TIMESTAMP},
+      buyerRemark = #{record.buyerRemark,jdbcType=VARCHAR},
+      orderRemark = #{record.orderRemark,jdbcType=VARCHAR},
+      createTime = #{record.createTime,jdbcType=TIMESTAMP},
+      updateTime = #{record.updateTime,jdbcType=TIMESTAMP},
+      deleteFlag = #{record.deleteFlag,jdbcType=INTEGER},
+      omsSystemStatus = #{record.omsSystemStatus,jdbcType=VARCHAR},
+      omsSystemRemark = #{record.omsSystemRemark,jdbcType=VARCHAR},
+      settleFlag = #{record.settleFlag,jdbcType=INTEGER},
+      refundTime = #{record.refundTime,jdbcType=TIMESTAMP},
+      auditTime = #{record.auditTime,jdbcType=TIMESTAMP},
+      orderSource = #{record.orderSource,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.morning.star.dms.order.entity.DmsOrderInfo" >
+    update dms_order_info
+    <set >
+      <if test="orderNo != null" >
+        orderNo = #{orderNo,jdbcType=VARCHAR},
+      </if>
+      <if test="outOrderNo != null" >
+        outOrderNo = #{outOrderNo,jdbcType=CHAR},
+      </if>
+      <if test="packageCode != null" >
+        packageCode = #{packageCode,jdbcType=VARCHAR},
+      </if>
+      <if test="lockApplyCode != null" >
+        lockApplyCode = #{lockApplyCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payNo != null" >
+        payNo = #{payNo,jdbcType=VARCHAR},
+      </if>
+      <if test="distributorCode != null" >
+        distributorCode = #{distributorCode,jdbcType=VARCHAR},
+      </if>
+      <if test="distributorName != null" >
+        distributorName = #{distributorName,jdbcType=VARCHAR},
+      </if>
+      <if test="clearanceType != null" >
+        clearanceType = #{clearanceType,jdbcType=VARCHAR},
+      </if>
+      <if test="taxation != null" >
+        taxation = #{taxation,jdbcType=DECIMAL},
+      </if>
+      <if test="totalAmount != null" >
+        totalAmount = #{totalAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="discountFee != null" >
+        discountFee = #{discountFee,jdbcType=DECIMAL},
+      </if>
+      <if test="saleAmount != null" >
+        saleAmount = #{saleAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="logisticsFee != null" >
+        logisticsFee = #{logisticsFee,jdbcType=DECIMAL},
+      </if>
+      <if test="owner != null" >
+        owner = #{owner,jdbcType=VARCHAR},
+      </if>
+      <if test="orderStatus != null" >
+        orderStatus = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="auditStatus != null" >
+        auditStatus = #{auditStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="submitTime != null" >
+        submitTime = #{submitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="payType != null" >
+        payType = #{payType,jdbcType=VARCHAR},
+      </if>
+      <if test="payTime != null" >
+        payTime = #{payTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="outTime != null" >
+        outTime = #{outTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="couponJson != null" >
+        couponJson = #{couponJson,jdbcType=VARCHAR},
+      </if>
+      <if test="shippedTime != null" >
+        shippedTime = #{shippedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logisticsCompany != null" >
+        logisticsCompany = #{logisticsCompany,jdbcType=VARCHAR},
+      </if>
+      <if test="logisticsNo != null" >
+        logisticsNo = #{logisticsNo,jdbcType=VARCHAR},
+      </if>
+      <if test="signTime != null" >
+        signTime = #{signTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="buyerRemark != null" >
+        buyerRemark = #{buyerRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="orderRemark != null" >
+        orderRemark = #{orderRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        createTime = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleteFlag != null" >
+        deleteFlag = #{deleteFlag,jdbcType=INTEGER},
+      </if>
+      <if test="omsSystemStatus != null" >
+        omsSystemStatus = #{omsSystemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="omsSystemRemark != null" >
+        omsSystemRemark = #{omsSystemRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="settleFlag != null" >
+        settleFlag = #{settleFlag,jdbcType=INTEGER},
+      </if>
+      <if test="refundTime != null" >
+        refundTime = #{refundTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="auditTime != null" >
+        auditTime = #{auditTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderSource != null" >
+        orderSource = #{orderSource,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where orderId = #{orderId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.morning.star.dms.order.entity.DmsOrderInfo" >
+    update dms_order_info
+    set orderNo = #{orderNo,jdbcType=VARCHAR},
+      outOrderNo = #{outOrderNo,jdbcType=CHAR},
+      packageCode = #{packageCode,jdbcType=VARCHAR},
+      lockApplyCode = #{lockApplyCode,jdbcType=VARCHAR},
+      payNo = #{payNo,jdbcType=VARCHAR},
+      distributorCode = #{distributorCode,jdbcType=VARCHAR},
+      distributorName = #{distributorName,jdbcType=VARCHAR},
+      clearanceType = #{clearanceType,jdbcType=VARCHAR},
+      taxation = #{taxation,jdbcType=DECIMAL},
+      totalAmount = #{totalAmount,jdbcType=DECIMAL},
+      discountFee = #{discountFee,jdbcType=DECIMAL},
+      saleAmount = #{saleAmount,jdbcType=DECIMAL},
+      logisticsFee = #{logisticsFee,jdbcType=DECIMAL},
+      owner = #{owner,jdbcType=VARCHAR},
+      orderStatus = #{orderStatus,jdbcType=VARCHAR},
+      auditStatus = #{auditStatus,jdbcType=VARCHAR},
+      submitTime = #{submitTime,jdbcType=TIMESTAMP},
+      payType = #{payType,jdbcType=VARCHAR},
+      payTime = #{payTime,jdbcType=TIMESTAMP},
+      outTime = #{outTime,jdbcType=TIMESTAMP},
+      couponJson = #{couponJson,jdbcType=VARCHAR},
+      shippedTime = #{shippedTime,jdbcType=TIMESTAMP},
+      logisticsCompany = #{logisticsCompany,jdbcType=VARCHAR},
+      logisticsNo = #{logisticsNo,jdbcType=VARCHAR},
+      signTime = #{signTime,jdbcType=TIMESTAMP},
+      buyerRemark = #{buyerRemark,jdbcType=VARCHAR},
+      orderRemark = #{orderRemark,jdbcType=VARCHAR},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      deleteFlag = #{deleteFlag,jdbcType=INTEGER},
+      omsSystemStatus = #{omsSystemStatus,jdbcType=VARCHAR},
+      omsSystemRemark = #{omsSystemRemark,jdbcType=VARCHAR},
+      settleFlag = #{settleFlag,jdbcType=INTEGER},
+      refundTime = #{refundTime,jdbcType=TIMESTAMP},
+      auditTime = #{auditTime,jdbcType=TIMESTAMP},
+      orderSource = #{orderSource,jdbcType=VARCHAR}
+    where orderId = #{orderId,jdbcType=BIGINT}
+  </update>
+</mapper>

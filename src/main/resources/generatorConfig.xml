@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+	<classPathEntry
+		location="C:/ms_work/mvn_repertories/mysql/mysql-connector-java/5.1.30/mysql-connector-java-5.1.30.jar" />
+	<context id="AllpyraTables" targetRuntime="MyBatis3">
+		<property name="mergeable" value="false"></property>
+		<plugin type="org.mybatis.generator.plugins.SerializablePlugin"></plugin>
+		<plugin type="org.mybatis.generator.plugins.RenameExampleClassPlugin">
+			<property name="searchString" value="Example$" />
+			<property name="replaceString" value="Criteria" />
+		</plugin>
+		<commentGenerator>
+			<property name="suppressAllComments" value="true" />
+			<property name="suppressDate" value="true" />
+		</commentGenerator>
+		<jdbcConnection driverClass="org.gjt.mm.mysql.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/morning_star_dms_order?autoReconnect=true"
+			userId="root" password="">
+		</jdbcConnection>
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<javaModelGenerator targetPackage="com.morning.star.dms.order.entity"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.morning.star.dms.order.dao"
+			targetProject="src/main/java" >
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.morning.star.dms.order.dao" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>  
+		
+		<!-- <javaModelGenerator targetPackage="com.morning.star.tpms.order.entity"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+		<sqlMapGenerator targetPackage="com.morning.star.tpms.order.dao"
+			targetProject="src/main/java" >
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<javaClientGenerator type="XMLMAPPER"
+			targetPackage="com.morning.star.tpms.order.dao" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>  -->
+
+		<!-- <table schema="morning_star_dms_product" tableName="dms_item_info" domainObjectName="DmsItemInfo"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="dmsItemId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table>  -->
+	  <!-- 
+		<table schema="morning_star_dms_user" tableName="dms_company_account" domainObjectName="DmsCompanyAccount"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+		</table>  
+		 <table schema="morning_star_dms_user" tableName="dms_company_api_info" domainObjectName="DmsCompanyApiInfo"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+		</table> 		
+		 <table schema="morning_star_dms_user" tableName="dms_company_level" domainObjectName="DmsCompanyLevel"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+		</table> 
+		 <table schema="morning_star_dms_user" tableName="dms_company_trade_record" domainObjectName="DmsCompanyTradeRecord"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<columnOverride column="tradeType" javaType="java.lang.Integer" />
+		</table> 
+		 <table schema="morning_star_dms_user" tableName="dms_company_user_role" domainObjectName="DmsCompanyUserRole"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+		</table>  	
+		 <table schema="morning_star_dms_user" tableName="dms_company_function" domainObjectName="DmsCompanyFunction"
+			enableCountByExample="false" 
+			enableDeleteByExample="false" 
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+		</table> 
+		<table schema="morning_star_dms_user" tableName="dms_company_method" domainObjectName="DmsCompanyMethod"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+		</table> 
+		<table schema="morning_star_dms_user" tableName="dms_function_method" domainObjectName="DmsFunctionMethod"
+			enableCountByExample="false" 
+			enableDeleteByExample="false" 
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+		</table> 
+		 <table schema="morning_star_dms_user" tableName="dms_company_role" domainObjectName="DmsCompanyRole"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="roleId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table> 
+		 <table schema="morning_star_dms_user" tableName="dms_company_role_auth" domainObjectName="DmsCompanyRoleAuth"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+		</table>
+		<table schema="morning_star_dms_user" tableName="dms_company_users" domainObjectName="DmsCompanyUsers"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="cuin" sqlStatement="MySql" type="post" identity="true"/> 
+		</table>
+		<table schema="morning_star_dms_user" tableName="dms_company" domainObjectName="DmsCompany"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="dmsCompanyId" sqlStatement="MySql" type="post" identity="true"/> 
+			<columnOverride column="companyType" javaType="java.lang.Integer" />
+		</table> 
+		-->
+		<!-- <table schema="morning_star_tpms" tableName="tpms_order_info" domainObjectName="TpmsOrderInfo"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="orderId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table>
+		<table schema="morning_star_tpms" tableName="tpms_order_item" domainObjectName="TpmsOrderItem"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="orderItemId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table> -->
+		<!-- <table schema="morning_star_dms_user" tableName="dms_company_accountPeriod" domainObjectName="DmsCompanyAccountPeriod"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="companyAccoutId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table>
+		<table schema="morning_star_dms_user" tableName="dms_company_settleMode" domainObjectName="DmsCompanySettleMode"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="settleModeId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table>
+		<table schema="morning_star_dms_user" tableName="dms_company_account" domainObjectName="DmsCompanyAccount"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+		<table schema="morning_star_dms_user" tableName="dms_account_ope_log" domainObjectName="DmsAccountOpeLog"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="accountLogId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table>
+		</table>  -->
+		<!--  <table schema="morning_star_dms_order" tableName="dms_account_bill" domainObjectName="DmsAccountBill"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="billId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table>
+		<table schema="morning_star_dms_order" tableName="dms_account_bill_item" domainObjectName="DmsAccountBillItem"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="billItemId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table> 
+		<table schema="morning_star_dms_order" tableName="dms_order_info" domainObjectName="DmsOrderInfo"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="orderId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table>
+		<table schema="morning_star_dms_order" tableName="dms_account_bill_generate_log" domainObjectName="DmsAccountBillGenerateLog"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="generateLogId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table>
+		<table schema="morning_star_dms_order" tableName="dms_account_holiday" domainObjectName="DmsAccountHoliday"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="holidayId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table>-->
+		<table schema="morning_star_dms_order" tableName="dms_order_info" domainObjectName="DmsOrderInfo"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="orderId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table>  
+		<!-- <table schema="morning_star_dms_product" tableName="dms_channel" domainObjectName="DmsChannel"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="channelId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table> -->
+		<!-- <table schema="morning_star_dms_product" tableName="dms_warehouse" domainObjectName="DmsWarehouse"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="warehouseId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table> -->
+		<!-- <table schema="morning_star_dms_order" tableName="dms_purchase_order" domainObjectName="DmsPurchaseOrder"
+			selectByExampleQueryId="false">
+			<property name="useActualColumnNames" value="true" />
+			<generatedKey column="purchaseId" sqlStatement="MySql" type="post" identity="true"/> 
+		</table> -->
+		
+	</context>
+</generatorConfiguration>
